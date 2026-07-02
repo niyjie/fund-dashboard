@@ -2,7 +2,7 @@ const SUPABASE_URL =
 "https://cetpayxtoydyitahhdqh.supabase.co";
 
 const SUPABASE_KEY =
-"你的KEY保持不变";
+sb_publishable_jIBr6C0-fb6p4x1Ng6gfZw_uDCrsJ1a
 
 const sbClient =
 window.supabase.createClient(
