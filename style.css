@@ -11,6 +11,10 @@ body{
     padding:20px;
 }
 
+h1,h2{
+    margin-top:25px;
+}
+
 .summary{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -21,11 +25,13 @@ body{
     background:#1e293b;
     border-radius:16px;
     padding:20px;
+    text-align:center;
 }
 
 .card div{
     font-size:28px;
     font-weight:bold;
+    margin-top:10px;
 }
 
 .fund-card{
@@ -38,10 +44,10 @@ body{
 input,
 select{
     width:100%;
-    margin-top:10px;
     padding:12px;
-    border-radius:10px;
+    margin-top:10px;
     border:none;
+    border-radius:10px;
     box-sizing:border-box;
 }
 
@@ -53,11 +59,15 @@ button{
     cursor:pointer;
 }
 
+button:hover{
+    opacity:0.9;
+}
+
 #calendar{
     display:grid;
     grid-template-columns:repeat(7,1fr);
     gap:8px;
-    margin-top:15px;
+    margin-top:20px;
 }
 
 .calendar-header{
@@ -67,22 +77,53 @@ button{
 }
 
 .calendar-day{
-    min-height:70px;
-    background:#334155;
-    border-radius:10px;
-    text-align:center;
-    padding-top:10px;
+    min-height:75px;
+    border-radius:12px;
     cursor:pointer;
-}
-
-.calendar-day.has-record{
-    background:#16a34a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    transition:all .2s ease;
+    background:#334155;
 }
 
 .calendar-day:hover{
     transform:scale(1.05);
 }
 
-.day-number{
-    font-weight:bold;
+.level1{
+    background:#14532d;
+}
+
+.level2{
+    background:#15803d;
+}
+
+.level3{
+    background:#16a34a;
+}
+
+.level4{
+    background:#22c55e;
+}
+
+#dayDetail{
+    margin-top:20px;
+}
+
+#monthStats{
+    margin-top:20px;
+}
+
+@media(max-width:768px){
+
+.calendar-day{
+    min-height:55px;
+}
+
+.card div{
+    font-size:22px;
+}
+
 }
