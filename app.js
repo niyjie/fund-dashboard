@@ -15,7 +15,8 @@ window.loadInvestments = async function () {
     const { data, error } =
     await sbClient
     .from("investments")
-    .select("*");
+    .select("*")
+    .order("invest_date",{ascending:false});
 
     if(error){
         console.error(error);
@@ -38,15 +39,15 @@ window.loadInvestments = async function () {
         html += `
         <div class="fund-card">
 
-            <h3>${item.fund_name}</h3>
+        <h3>${item.fund_name}</h3>
 
-            <p>投入：¥${item.amount}</p>
+        <p>投入：¥${item.amount}</p>
 
-            <p>当前市值：¥${item.current_value}</p>
+        <p>当前市值：¥${item.current_value}</p>
 
-            <p>盈利：¥${profit.toFixed(2)}</p>
+        <p>盈利：¥${profit.toFixed(2)}</p>
 
-            <p>日期：${item.invest_date}</p>
+        <p>日期：${item.invest_date}</p>
 
         </div>
         `;
@@ -57,33 +58,83 @@ window.loadInvestments = async function () {
 
     const rate =
     invested > 0
-    ? (totalProfit / invested * 100)
+    ? totalProfit / invested * 100
     : 0;
 
     document.getElementById(
-        "totalInvested"
+    "totalInvested"
     ).innerText =
     "¥" + invested.toFixed(2);
 
     document.getElementById(
-        "currentValue"
+    "currentValue"
     ).innerText =
     "¥" + current.toFixed(2);
 
     document.getElementById(
-        "profit"
+    "profit"
     ).innerText =
     "¥" + totalProfit.toFixed(2);
 
     document.getElementById(
-        "profitRate"
+    "profitRate"
     ).innerText =
     rate.toFixed(2) + "%";
 
     document.getElementById(
-        "fundList"
+    "fundList"
     ).innerHTML =
     html;
+};
+
+window.saveInvestment =
+async function(){
+
+    const fund_name =
+    document.getElementById(
+    "fundName"
+    ).value;
+
+    const amount =
+    Number(
+    document.getElementById(
+    "amount"
+    ).value
+    );
+
+    const current_value =
+    Number(
+    document.getElementById(
+    "currentValueInput"
+    ).value
+    );
+
+    const invest_date =
+    document.getElementById(
+    "investDate"
+    ).value;
+
+    const { error } =
+    await sbClient
+    .from("investments")
+    .insert([
+    {
+        fund_name,
+        amount,
+        current_value,
+        invest_date
+    }
+    ]);
+
+    if(error){
+        alert("保存失败");
+        console.error(error);
+        return;
+    }
+
+    alert("保存成功");
+
+    loadInvestments();
 };
 
 loadInvestments();
