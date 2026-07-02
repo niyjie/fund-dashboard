@@ -2,7 +2,7 @@ const SUPABASE_URL =
 "https://cetpayxtoydyitahhdqh.supabase.co";
 
 const SUPABASE_KEY =
-sb_publishable_jIBr6C0-fb6p4x1Ng6gfZw_uDCrsJ1a
+"sb_publishable_jIBr6C0-fb6p4x1Ng6gfZw_uDCrsJ1a";
 
 const sbClient =
 window.supabase.createClient(
@@ -79,15 +79,10 @@ const item = fundMap[name];
 
 html += `
 <div class="fund-card">
-
 <h3>${name}</h3>
-
 <p>累计投入：¥${item.amount.toFixed(2)}</p>
-
 <p>当前市值：¥${item.current.toFixed(2)}</p>
-
 <p>记录数：${item.count}</p>
-
 </div>
 `;
 
