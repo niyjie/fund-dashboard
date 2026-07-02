@@ -18,39 +18,69 @@
 
 <div class="container">
 
-    <h1>📈 基金驾驶舱</h1>
+<h1>📈 基金驾驶舱</h1>
 
-    <div class="summary">
+<div class="summary">
 
-        <div class="card">
-            <h3>总投入</h3>
-            <div id="totalInvested">0</div>
-        </div>
+<div class="card">
+<h3>总投入</h3>
+<div id="totalInvested">0</div>
+</div>
 
-        <div class="card">
-            <h3>当前市值</h3>
-            <div id="currentValue">0</div>
-        </div>
+<div class="card">
+<h3>当前市值</h3>
+<div id="currentValue">0</div>
+</div>
 
-        <div class="card">
-            <h3>累计盈利</h3>
-            <div id="profit">0</div>
-        </div>
+<div class="card">
+<h3>累计盈利</h3>
+<div id="profit">0</div>
+</div>
 
-        <div class="card">
-            <h3>收益率</h3>
-            <div id="profitRate">0%</div>
-        </div>
+<div class="card">
+<h3>收益率</h3>
+<div id="profitRate">0%</div>
+</div>
 
-    </div>
+</div>
 
-    <h2>持仓明细</h2>
+<h2>新增定投记录</h2>
 
-    <div id="fundList"></div>
+<div class="fund-card">
 
-    <button onclick="loadInvestments()">
-        刷新数据
-    </button>
+<select id="fundName">
+
+<option value="易方达科创50联接C（100609）">
+易方达科创50联接C（100609）
+</option>
+
+<option value="易方达沪深300ETF联接A（110020）">
+易方达沪深300ETF联接A（110020）
+</option>
+
+</select>
+
+<input id="amount"
+type="number"
+placeholder="投入金额">
+
+<input id="currentValueInput"
+type="number"
+step="0.01"
+placeholder="当前市值">
+
+<input id="investDate"
+type="date">
+
+<button onclick="saveInvestment()">
+保存记录
+</button>
+
+</div>
+
+<h2>持仓记录</h2>
+
+<div id="fundList"></div>
 
 </div>
 
