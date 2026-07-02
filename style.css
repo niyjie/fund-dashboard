@@ -52,3 +52,37 @@ button{
     border-radius:10px;
     cursor:pointer;
 }
+
+#calendar{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:8px;
+    margin-top:15px;
+}
+
+.calendar-header{
+    text-align:center;
+    font-weight:bold;
+    padding:10px;
+}
+
+.calendar-day{
+    min-height:70px;
+    background:#334155;
+    border-radius:10px;
+    text-align:center;
+    padding-top:10px;
+    cursor:pointer;
+}
+
+.calendar-day.has-record{
+    background:#16a34a;
+}
+
+.calendar-day:hover{
+    transform:scale(1.05);
+}
+
+.day-number{
+    font-weight:bold;
+}
