@@ -1,255 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>我的基金驾驶舱</title>
+
+<title>基金驾驶舱</title>
+
 <link rel="stylesheet" href="style.css">
 
-<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
-
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-background:#0f172a;
-color:#fff;
-padding:20px;
-}
-
-.container{
-max-width:1200px;
-margin:auto;
-}
-
-.header{
-text-align:center;
-margin-bottom:30px;
-}
-
-.header h1{
-font-size:40px;
-margin-bottom:10px;
-}
-
-.header p{
-color:#94a3b8;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-margin-bottom:30px;
-}
-
-.card{
-background:#1e293b;
-padding:20px;
-border-radius:20px;
-box-shadow:0 0 20px rgba(0,0,0,.3);
-}
-
-.card h3{
-color:#94a3b8;
-font-size:16px;
-margin-bottom:10px;
-}
-
-.value{
-font-size:32px;
-font-weight:bold;
-}
-
-.green{
-color:#22c55e;
-}
-
-.blue{
-color:#3b82f6;
-}
-
-.orange{
-color:#f97316;
-}
-
-.chart{
-height:400px;
-background:#1e293b;
-border-radius:20px;
-padding:20px;
-margin-bottom:30px;
-}
-
-.section{
-background:#1e293b;
-padding:25px;
-border-radius:20px;
-margin-bottom:20px;
-}
-
-.section h2{
-margin-bottom:15px;
-}
-
-.log-item{
-padding:12px;
-border-bottom:1px solid #334155;
-}
-
-.footer{
-text-align:center;
-margin-top:30px;
-color:#64748b;
-}
-</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
 
-<div class="container">
+<h1>基金驾驶舱</h1>
 
-<div class="header">
-<h1>📈 我的基金驾驶舱</h1>
-<p>长期定投 · 科创50 + 沪深300</p>
-</div>
+<button onclick="loadInvestments()">
+测试数据库连接
+</button>
 
-<div class="cards">
+<script src="app.js"></script>
 
-<div class="card">
-<h3>每月投入</h3>
-<div class="value green">¥500</div>
-</div>
-
-<div class="card">
-<h3>年度投入</h3>
-<div class="value blue">¥6000</div>
-</div>
-
-<div class="card">
-<h3>科创50联接C</h3>
-<div class="value orange">70%</div>
-</div>
-
-<div class="card">
-<h3>沪深300联接A</h3>
-<div class="value">30%</div>
-</div>
-
-</div>
-
-<div class="chart">
-<div id="pieChart" style="height:100%;"></div>
-</div>
-
-<div class="section">
-<h2>💰 当前定投计划</h2>
-
-<p style="margin-bottom:10px;">
-科创50联接C：
-<strong>350元/月</strong>
-</p>
-
-<p>
-沪深300ETF联接A：
-<strong>150元/月</strong>
-</p>
-</div>
-
-<div class="section">
-<h2>🎯 投资目标</h2>
-
-<p>坚持定投12个月</p>
-<br>
-
-<p>月投入：500元</p>
-
-<p>累计投入目标：6000元</p>
-
-<p>优先培养长期投资习惯</p>
-</div>
-
-<div class="section">
-<h2>📝 投资日志</h2>
-
-<div class="log-item">
-2026-06：开始建立定投计划
-</div>
-
-<div class="log-item">
-2026-07：持续执行，不追涨杀跌
-</div>
-
-<div class="log-item">
-2026-08：观察组合表现
-</div>
-
-</div>
-
-<div class="section">
-<h2>📊 当前策略</h2>
-
-<p>
-科创50作为成长仓位，
-沪深300作为核心底仓。
-</p>
-
-<br>
-
-<p>
-当前配置：
-<strong>70% 科创50 + 30% 沪深300</strong>
-</p>
-</div>
-
-<div class="footer">
-Fund Dashboard V1.0
-</div>
-
-</div>
-
-<script>
-
-var chart = echarts.init(document.getElementById('pieChart'));
-
-chart.setOption({
-backgroundColor:'transparent',
-tooltip:{
-trigger:'item'
-},
-series:[
-{
-type:'pie',
-radius:['40%','70%'],
-data:[
-{
-value:70,
-name:'科创50联接C'
-},
-{
-value:30,
-name:'沪深300联接A'
-}
-],
-label:{
-color:'#fff'
-}
-}
-]
-});
-
-window.addEventListener('resize',function(){
-chart.resize();
-});
-
-</script>
-
-<script src="app.js"></script>  
-  
 </body>
+
 </html>
