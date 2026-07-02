@@ -11,25 +11,16 @@ body{
     padding:20px;
 }
 
-h1{
-    text-align:center;
-}
-
 .summary{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:15px;
-    margin-top:20px;
 }
 
 .card{
     background:#1e293b;
     border-radius:16px;
     padding:20px;
-}
-
-.card h3{
-    margin:0 0 10px;
 }
 
 .card div{
@@ -39,16 +30,25 @@ h1{
 
 .fund-card{
     background:#1e293b;
-    margin-top:15px;
-    padding:20px;
     border-radius:16px;
+    padding:20px;
+    margin-top:15px;
+}
+
+input,
+select{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    box-sizing:border-box;
 }
 
 button{
-    margin-top:20px;
+    margin-top:15px;
     padding:12px 20px;
     border:none;
     border-radius:10px;
     cursor:pointer;
-    font-size:16px;
 }
