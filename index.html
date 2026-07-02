@@ -2,22 +2,57 @@
 <html lang="zh-CN">
 
 <head>
+
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>基金驾驶舱</title>
 
 <link rel="stylesheet" href="style.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
 
 <body>
 
-<h1>基金驾驶舱</h1>
+<div class="container">
 
-<button onclick="loadInvestments()">
-测试数据库连接
-</button>
+    <h1>📈 基金驾驶舱</h1>
+
+    <div class="summary">
+
+        <div class="card">
+            <h3>总投入</h3>
+            <div id="totalInvested">0</div>
+        </div>
+
+        <div class="card">
+            <h3>当前市值</h3>
+            <div id="currentValue">0</div>
+        </div>
+
+        <div class="card">
+            <h3>累计盈利</h3>
+            <div id="profit">0</div>
+        </div>
+
+        <div class="card">
+            <h3>收益率</h3>
+            <div id="profitRate">0%</div>
+        </div>
+
+    </div>
+
+    <h2>持仓明细</h2>
+
+    <div id="fundList"></div>
+
+    <button onclick="loadInvestments()">
+        刷新数据
+    </button>
+
+</div>
 
 <script src="app.js"></script>
 
