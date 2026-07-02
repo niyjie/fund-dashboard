@@ -26,17 +26,97 @@ window.loadInvestments = async function () {
     let invested = 0;
     let current = 0;
 
-    let html = "";
+    const fundMap = {};
 
     data.forEach(item=>{
 
         invested += Number(item.amount);
         current += Number(item.current_value);
 
+        if(!fundMap[item.fund_name]){
+            fundMap[item.fund_name] = {
+                amount:0,
+                current:0,
+                count:0
+            };
+        }
+
+        fundMap[item.fund_name].amount +=
+        Number(item.amount);
+
+        fundMap[item.fund_name].current +=
+        Number(item.current_value);
+
+        fundMap[item.fund_name].count += 1;
+    });
+
+    const totalProfit =
+    current - invested;
+
+    const rate =
+    invested > 0
+    ? totalProfit / invested * 100
+    : 0;
+
+    document.getElementById(
+        "totalInvested"
+    ).innerText =
+    "¥" + invested.toFixed(2);
+
+    document.getElementById(
+        "currentValue"
+    ).innerText =
+    "¥" + current.toFixed(2);
+
+    document.getElementById(
+        "profit"
+    ).innerText =
+    "¥" + totalProfit.toFixed(2);
+
+    document.getElementById(
+        "profitRate"
+    ).innerText =
+    rate.toFixed(2) + "%";
+
+    let summaryHtml = "";
+
+    Object.keys(fundMap).forEach(name=>{
+
+        const item = fundMap[name];
+
+        const profit =
+        item.current - item.amount;
+
+        summaryHtml += `
+        <div class="fund-card">
+
+        <h3>${name}</h3>
+
+        <p>累计投入：¥${item.amount.toFixed(2)}</p>
+
+        <p>当前市值：¥${item.current.toFixed(2)}</p>
+
+        <p>累计盈利：¥${profit.toFixed(2)}</p>
+
+        <p>记录数：${item.count}</p>
+
+        </div>
+        `;
+    });
+
+    document.getElementById(
+        "summaryFunds"
+    ).innerHTML =
+    summaryHtml;
+
+    let historyHtml = "";
+
+    data.forEach(item=>{
+
         const profit =
         item.current_value - item.amount;
 
-        html += `
+        historyHtml += `
         <div class="fund-card">
 
         <h3>${item.fund_name}</h3>
@@ -53,38 +133,10 @@ window.loadInvestments = async function () {
         `;
     });
 
-    const totalProfit =
-    current - invested;
-
-    const rate =
-    invested > 0
-    ? totalProfit / invested * 100
-    : 0;
-
     document.getElementById(
-    "totalInvested"
-    ).innerText =
-    "¥" + invested.toFixed(2);
-
-    document.getElementById(
-    "currentValue"
-    ).innerText =
-    "¥" + current.toFixed(2);
-
-    document.getElementById(
-    "profit"
-    ).innerText =
-    "¥" + totalProfit.toFixed(2);
-
-    document.getElementById(
-    "profitRate"
-    ).innerText =
-    rate.toFixed(2) + "%";
-
-    document.getElementById(
-    "fundList"
+        "historyList"
     ).innerHTML =
-    html;
+    historyHtml;
 };
 
 window.saveInvestment =
