@@ -78,12 +78,22 @@ Object.keys(fundMap).forEach(name=>{
 
 const item = fundMap[name];
 
+const profit =
+item.current - item.amount;
+
 html += `
 <div class="fund-card">
+
 <h3>${name}</h3>
+
 <p>累计投入：¥${item.amount.toFixed(2)}</p>
+
 <p>当前市值：¥${item.current.toFixed(2)}</p>
+
+<p>累计盈利：¥${profit.toFixed(2)}</p>
+
 <p>记录数：${item.count}</p>
+
 </div>
 `;
 
@@ -107,7 +117,7 @@ document.getElementById("calendarMonth");
 yearSelect.innerHTML = "";
 monthSelect.innerHTML = "";
 
-for(let y=2025;y<=2030;y++){
+for(let y=2025;y<=2035;y++){
 
 yearSelect.innerHTML +=
 `<option value="${y}">${y}年</option>`;
@@ -154,40 +164,62 @@ document.getElementById(
 ).value
 );
 
-const days =
+const firstDay =
+new Date(year,month-1,1)
+.getDay();
+
+const daysInMonth =
 new Date(year,month,0)
 .getDate();
 
 let html = "";
 
-for(let i=1;i<=days;i++){
+const weekNames = [
+"日","一","二","三","四","五","六"
+];
+
+weekNames.forEach(day=>{
+
+html += `
+<div class="calendar-header">
+${day}
+</div>
+`;
+
+});
+
+for(let i=0;i<firstDay;i++){
+
+html += `<div></div>`;
+
+}
+
+for(let day=1;day<=daysInMonth;day++){
 
 const dateString =
-`${year}-${String(month).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+`${year}-${String(month).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
 
-const hasRecord =
-investmentData.some(
+const records =
+investmentData.filter(
 x=>x.invest_date===dateString
 );
 
+const hasRecord =
+records.length > 0;
+
 html += `
 <div
-class="calendar-day"
+class="calendar-day ${hasRecord ? 'has-record' : ''}"
 onclick="showDay('${dateString}')"
-style="
-display:inline-block;
-width:50px;
-height:50px;
-margin:4px;
-line-height:50px;
-text-align:center;
-border-radius:8px;
-cursor:pointer;
-background:${hasRecord?'#22c55e':'#334155'};
-">
-${i}
+>
+
+<div class="day-number">
+${day}
+</div>
+
 </div>
 `;
+
 }
 
 document.getElementById(
@@ -204,20 +236,36 @@ investmentData.filter(
 x=>x.invest_date===date
 );
 
+let total = 0;
+
 let html =
 `<div class="fund-card">
-<h3>${date}</h3>`;
+
+<h3>${date}</h3>
+`;
 
 records.forEach(item=>{
 
+total += Number(item.amount);
+
 html += `
 <p>${item.fund_name}</p>
+
 <p>投入：¥${item.amount}</p>
+
 <p>当前市值：¥${item.current_value}</p>
+
 <hr>
 `;
 
 });
+
+html += `
+<h3>
+当日投入总额：
+¥${total}
+</h3>
+`;
 
 html += "</div>";
 
